@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: nakama
+      POSTGRES_USER: nakama
+      POSTGRES_PASSWORD: nakama
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nakama"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  nakama:
+    image: heroiclabs/nakama:3.17.0
+    depends_on:
+      postgres:
+        condition: service_healthy
+    entrypoint:
+      - "/bin/sh"
+      - "-ecx"
+      - |
+        /nakama/nakama migrate up --database.address nakama:nakama@postgres:5432/nakama &&
+        exec /nakama/nakama --config /nakama/data/config.yml
+    ports:
+      - "7350:7350"
+      - "7351:7351"
+      - "7352:7352"
+    volumes:
+      - ./data:/nakama/data
+      - ./modules:/nakama/modules
+
+volumes:
+  postgres_data:

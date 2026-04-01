@@ -1,0 +1,27 @@
+name: nakama1
+
+database:
+  address:
+    - "ram:Nakama%40Ram123@34.180.19.216:5432/Nakama?sslmode=disable"
+
+console:
+  username: "admin"
+  password: "password"
+  signing_key: "supersecret"
+  address: "0.0.0.0:7351"   # merged here ✅
+
+socket:
+  server_key: "defaultkey"
+  address: "0.0.0.0:7350"   # merged here ✅
+
+session:
+  encryption_key: "encryptionkey"
+  refresh_encryption_key: "refreshkey"
+  token_expiry_sec: 86400
+  refresh_token_expiry_sec: 604800
+
+runtime:
+  js_entrypoint: "index.js"
+
+logger:
+  level: "INFO"
