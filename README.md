@@ -2,6 +2,15 @@
 
 The Nakama-powered authoritative server for real-time Tic-Tac-Toe games. Handles match logic, win/loss recording, and timed game modes.
 
+
+[Frontend repository](https://github.com/Ram1008/Tic-Tac-Toe-frontend) · [Local setup](#-setup-and-installation)
+
+## What this project demonstrates
+
+The server owns move validation, turn timing and match results. Clients send moves and render the broadcast state. This separation keeps the game rules consistent between players.
+
+Run the companion frontend in two separate browser sessions to demonstrate match creation, joining and state synchronization.
+
 ## 🚀 Setup and Installation
 
 ### Prerequisites
